@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "874628167347",
+    "project_id": "aromablend-fd363",
+    "storage_bucket": "aromablend-fd363.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874628167347:android:73fe5c6da80454c8fb62c6",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEvsTb66dtCorYZv2-TxLU6OJK7vwpUlA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874628167347:android:28f33c9298afa61ffb62c6",
+        "android_client_info": {
+          "package_name": "com.example.software_eng_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEvsTb66dtCorYZv2-TxLU6OJK7vwpUlA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

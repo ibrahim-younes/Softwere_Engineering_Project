@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 
+import 'package:aroma_blend_app/Pages/forgot_password_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 
 class LogInPage extends StatefulWidget {
   final VoidCallback showRegisterPage;
@@ -14,15 +14,31 @@ class LogInPage extends StatefulWidget {
 }
 
 class _LogInPageState extends State<LogInPage> {
-
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  Future signIn() async{
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _usernameController.text.trim(), 
-      password: _passwordController.text.trim()
-      );
+  Future signIn() async {
+    try{
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _usernameController.text.trim(),
+          password: _passwordController.text.trim());
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text('Signed In Successfully!'),
+            );
+          });
+    } on FirebaseAuthException catch (e){
+      print(e);
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text(e.message.toString()),
+            );
+          });
+    }
   }
 
   @override
@@ -41,30 +57,31 @@ class _LogInPageState extends State<LogInPage> {
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [     
+                children: [
                   Icon(
                     Icons.coffee,
                     size: 100,
                   ),
-                  SizedBox(height: 50,),  
-              
+                  SizedBox(
+                    height: 50,
+                  ),
+
                   //Greeting Text
+                  Text('Hello!',
+                      style: GoogleFonts.bebasNeue(
+                        fontSize: 52,
+                      )),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(
-                    'Hello!',
-                    style: GoogleFonts.bebasNeue(
-                      fontSize: 52, 
-                    )
-                  ),
-                  SizedBox(height: 10,),
-                   Text(
                     'Where have you been?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold, 
-                      fontSize: 24
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
-                  SizedBox(height: 50,),
-                  
+                  SizedBox(
+                    height: 50,
+                  ),
+
                   //Email textfield
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -87,7 +104,7 @@ class _LogInPageState extends State<LogInPage> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  
+
                   //password textfield
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -111,33 +128,61 @@ class _LogInPageState extends State<LogInPage> {
                     ),
                   ),
                   SizedBox(height: 10),
-              
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return ForgotPasswordPage();
+                                },
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Forgot Password?',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10),
+
                   //sign in button
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: GestureDetector(
                       onTap: signIn,
                       child: Container(
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.deepPurple,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Log In",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                          padding: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.deepPurple,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Log In",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
                               ),
                             ),
-                          )
-                      ),
+                          )),
                     ),
                   ),
                   SizedBox(height: 25),
-                  
+
                   // not a returning customer
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -160,7 +205,6 @@ class _LogInPageState extends State<LogInPage> {
                       )
                     ],
                   )
-              
                 ],
               ),
             ),

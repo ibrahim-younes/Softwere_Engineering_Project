@@ -30,7 +30,7 @@ class _OrderPageState extends State<OrderPage> {
   }
 
   // customize Shots
-  double shotsValue = 0.5;
+  double shotsValue = 1.5;
   void customizeShots(double newValue) {
     setState(() {
       shotsValue = newValue;
@@ -60,6 +60,7 @@ class _OrderPageState extends State<OrderPage> {
       appBar: AppBar(title: Text(widget.drink.name)),
       backgroundColor: Colors.brown[200],
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // drink image
           Image.asset(widget.drink.imagePath),
@@ -121,8 +122,8 @@ class _OrderPageState extends State<OrderPage> {
                         value: shotsValue,
                         label: shotsValue.toString(),
                         divisions: 2,
-                        min: 0,
-                        max: 2,
+                        min: 1,
+                        max: 3,
                         onChanged: (value) => customizeShots(value),
                       ),
                     )
